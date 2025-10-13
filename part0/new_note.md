@@ -5,17 +5,17 @@ sequenceDiagram
 
   browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note note=Greetings+from+Jo%C3%A3o+Pessoa%2C+Brazil
   activate server
-  server-->>browser REDIRECT /exampleapp/notes
+  server-->>browser: REDIRECT /exampleapp/notes
   deactivate server
 
   browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/notes
   activate server
-  server-->>browser HTML document
+  server-->>browser: HTML document
   deactivate server
 
   browser ->> server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
   activate server
-  server-->>browser HTML document
+  server-->>browser: HTML document
   deactivate server
 
   browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
