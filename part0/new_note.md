@@ -4,7 +4,7 @@ sequenceDiagram
   participant browser
   participant server
 
-  browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+  browser ->> server: POST https://studies.cs.helsinki.fi/exampleapp/new_note note=Greetings+from+Jo%C3%A3o+Pessoa%2C+Brazil
   activate server
   server-->>browser REDIRECT /exampleapp/notes
   deactivate server
