@@ -1,31 +1,60 @@
 import { useState } from "react";
 
-const Button = (props) => {
+const Button = ({ onClick, text }) => {
   return (
-    <button onClick={props.onClick}>
-      {props.text}
+    <button onClick={onClick}>
+      {text}
     </button>
   );
 };
 
-const Display = (props) => {
-  return <h2>{props.text}</h2>;
+const Display = ({ text }) => {
+  return <h2>{text}</h2>;
 };
 
-const Statistics = (props) => {
-  const all = props.good + props.neutral + props.bad;
-  const average = (props.good - props.bad) / all;
-  const positive = (props.good / all) * 100;
-  return (
-    <div>
-      <p>good: {props.good}</p>
-      <p>neutral: {props.neutral}</p>
-      <p>bad: {props.bad}</p>
-      <p>all: {all}</p>
-      <p>average: {average}</p>
-      <p>positive: {positive} %</p>
-    </div>
-  );
+const StatisticsLine = ({ text, value }) => {
+  if (text === "positive") {
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value} %</td>
+      </tr>
+    );
+  } else if (text) {
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    );
+  }
+};
+
+const Statistics = ({ good, neutral, bad }) => {
+  const all = good + neutral + bad;
+  const average = (good - bad) / all;
+  const positive = (good / all) * 100;
+
+  if (all === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    );
+  } else {
+    return (
+      <table>
+        <tbody>
+          <StatisticsLine text="good" value={good} />
+          <StatisticsLine text="neutral" value={neutral} />
+          <StatisticsLine text="bad" value={bad} />
+          <StatisticsLine text="all" value={all} />
+          <StatisticsLine text="average" value={average.toFixed(1)} />
+          <StatisticsLine text="positive" value={positive.toFixed(1)} />
+        </tbody>
+      </table>
+    );
+  }
 };
 
 const App = () => {
